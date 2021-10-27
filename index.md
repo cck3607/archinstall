@@ -21,29 +21,50 @@ timedatectl set-ntp true
 ### check time with 
 timedatectl status
 ## Creating EFI Partition Disk
-fdisk -l ###hard disk should be labled /dev/sda
+fdisk -l 
+###hard disk should be labled /dev/sda
 fdisk /dev/sda
-p ###should see command (m for help) enter p 
-n ### new partition 
-p ### primary partition 
-1 ### first partition 
-press enter ### for first sector 
-+1024M ###set size for last sector 
+###should see command (m for help) enter p 
+p 
+### then create a new partition with n
+n 
+### then set primary partition with command below 
+p 
+### enter 1 to set to first partition 
+1 
+### for first sector just leave blank and hit enter for default
+press enter 
+###now set size for last sector to command below
++1024M  
 ## Creating SWAP Partition Disk
-n ### new partition
-p ### primary partition
-2 ### 2nd partition
-press enter ### for first sector 
-+4G ###set size for last sector
-t ### change partition type 
-2 ###2nd partition==Swap
-82 ### 82==swap
+### then create a new partition with n
+n 
+### then set primary partition with command below 
+p 
+### enter 2 to set to 2nd partition 
+2 
+### for first sector just leave blank and hit enter for default
+press enter 
+###now set size for last sector to command below
++4G 
+### change partition type with command below
+t 
+###2nd partition==Swap
+2 
+### enter 82==swap
+82 
+
 ## Creating /(root) Partition Disk
-n ### new partition
-p ### primary partition
-3 ### 3rd partition
-press enter ### to use default start sector
-press enter again ### to use remaining space /
+### now create a new partition with n again
+n 
+### then set primary partition with command below 
+p 
+### enter 3 to set to 3rd partition 
+3 
+### for first sector just leave blank and hit enter for default
+press enter 
+### leave blank again to use remaining space /
+press enter 
 ## Once you have created partitions, use p to confirm the creation of partitions and then, w to save the changes.
 
 ## Create Filesystem 
@@ -128,10 +149,7 @@ shutdown now
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+### After installing 
+You should now be in the desktop enviroment. Here you must login as root with the password we set earlier.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cck3607/archinstall/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Creating users
