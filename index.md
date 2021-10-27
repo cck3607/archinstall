@@ -207,7 +207,7 @@ nano /etc/sudoers
 ##to change the to zsh enter the command below
 chsh -s /bin/zsh
 ```
-##Adding alias in shell
+## Adding Alias 
 ```markdown
 #enter command below to add alias to clear
 alias c='clear
@@ -215,7 +215,7 @@ alias c='clear
 alias h='history'
 alias j='jobs -l'
 ```
-##Adding Color to Shell
+## Adding Color to Shell
 ```markdown
 #Enter the command below to change color to red
 PS1="\033[31m[\u@\h \w]\$ \033[0m"
