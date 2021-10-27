@@ -1,19 +1,22 @@
-## Welcome to GitHub Pages
+## Start of Install 
 
-You can use the [editor on GitHub](https://github.com/cck3607/archinstall/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+The first step is downloading the arch iso. It is very important that you connect this iso via the setting and cd/disk image. Once connected the first thing you should do is check you internet connect. The first iso I downloaded did not allow me to connect to the internet after a few hours of trying to fix it I finally downloaded a different iso that connected to the internet right away.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Once inside the VM
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+After gaining access to the VM with your iso follow these steps.
 
 ```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+
+# Confirming internet 
+ip addr show
+ping google.com
+## Set The Console Keyborad Layout
+ls /usr/share/kbd/keymaps/**/*.map.gz 
+## Verify The Boot Mode
+
+ls /sys/firmware/efi/efivars
 
 - Bulleted
 - List
