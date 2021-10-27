@@ -4,7 +4,7 @@ The first step is downloading the arch iso. It is very important that you connec
 
 ### Once inside the VM
 
-After gaining access to the VM with your iso follow these steps.
+After gaining access to the VM with your iso follow these steps and enter them in order to install arch.
 
 ```markdown
 
@@ -47,20 +47,81 @@ press enter again ### to use remaining space /
 ## Once you have created partitions, use p to confirm the creation of partitions and then, w to save the changes.
 
 ## Create Filesystem 
-
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda3
 mkswp /dev/sda2
 
 ##Mount partitions 
 mount /dev/sda3 /mnt
-
 mkdir /mnt/efi
-
 mount /dev/sda1 /mnt/efi
-
 swapon /dev/sda2
 
+##Select Mirrors
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+## then update the mirror list file with 10 mirrors by download speed
+reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
+##Install Arch Linux Base System
+pacstrap /mnt/ base linux linux-firmware net-tools networkmanager openssh nano 
+###you can use nano or vi. Here is where you would install any other tools or packages you want 
+
+##Create fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+###Verify the fstab entries using the below command.
+cat /mnt/etc/fstab
+
+##Arch Linux System Configuration 
+arch-chroot /mnt ###chroot to the new system
+
+##Set System Language 
+###You can configure the system language by uncommenting the required languages from /etc/locale.gen file
+nano /etc/locale.gen
+###Uncomment en_US.UTF-8 UTF-8 for American-English and then generate locales by running
+###control x to save and exit
+locale-gen
+###Set the LANG variable in /etc/locale.conf file
+echo "LANG=en_US.UTF-8"  > /etc/locale.conf
+
+##Set Timezone
+###configure the system time zone by creating a symlink of your timezone to the /etc/localtime file
+ln -sf /usr/share/zoneinfo/US/Central /etc/localtime 
+###all the available timezones are found under /usr/share/zoneinfo directory
+###set the hardware clock to UTC.
+hwclock --systohc --utc
+
+##Set Hostname
+###Place the system hostname in /etc/hostname file
+echo "archlinux-2021.connor.local" > /etc/hostname
+
+##Set Root Password
+passwd
+
+##Install Grub Bootloader
+###make sure you are still in arch-chroot
+pacman -S grub efibootmgr
+###Create the directory where the EFI partition will be mounted
+mkdir /boot/efi
+###mount the esp partition just created
+mount /dev/sda1 /boot/efi
+###install grub with the command below be careful with spaces
+grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+###last step below 
+grub-mkconfig -o /boot/grub/grub.cfg
+
+##Install Desktop Enviroment(GNOME in this case)
+###here is where you can reboot, I found it easier to install gnome before reboot
+pacman -S xorg
+###now install GNOME dektop enviroment on arch linux using
+pacman -S gnome
+###now enable display manager for GDM for arch as well as enabling network manager
+systemctl start gdm.service
+systemctl enable gdm.service
+systemctl enable NetworkManager.service
+###now exit from chroot with exit command
+exit
+###then shutdowm system and reboot
+shutdown now
 
 [Link](url) and ![Image](src)
 ```
