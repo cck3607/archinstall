@@ -20,7 +20,10 @@ ls /sys/firmware/efi/efivars
 timedatectl set-ntp true
 ### check time with 
 timedatectl status
-## Creating EFI Partition Disk
+
+```
+## Creating Partitions 
+```markdown
 fdisk -l 
 ###hard disk should be labled /dev/sda
 fdisk /dev/sda
@@ -66,8 +69,10 @@ press enter
 ### leave blank again to use remaining space /
 press enter 
 ## Once you have created partitions, use p to confirm the creation of partitions and then, w to save the changes.
+```
 
-## Create Filesystem 
+## Creating Filesystem 
+```markdown
 mkfs.fat -F32 /dev/sda1
 mkfs.ext4 /dev/sda3
 mkswp /dev/sda2
@@ -77,7 +82,7 @@ mount /dev/sda3 /mnt
 mkdir /mnt/efi
 mount /dev/sda1 /mnt/efi
 swapon /dev/sda2
-
+```
 ##Select Mirrors
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 ## then update the mirror list file with 10 mirrors by download speed
