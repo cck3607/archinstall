@@ -83,29 +83,29 @@ mkdir /mnt/efi
 mount /dev/sda1 /mnt/efi
 swapon /dev/sda2
 ```
-## Selecting Mirroor
+## Selecting Mirrors
 ```markdown
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 ## then update the mirror list file with 10 mirrors by download speed
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 ```
-##Installing Arch Linux Base System
+## Installing Arch Linux Base System
 ```markdown
 pacstrap /mnt/ base linux linux-firmware net-tools networkmanager openssh nano 
 ###you can use nano or vi. Here is where you would install any other tools or packages you want 
 ```
-##Creating fstab
+## Creating fstab
 ```markdown
 genfstab -U /mnt >> /mnt/etc/fstab
 ###Verify the fstab entries using the below command.
 cat /mnt/etc/fstab
 ```
-##Arch Linux System Configuration 
+## Arch Linux System Configuration
 ```markdown
 ###chroot to the new system
 arch-chroot /mnt 
 ```
-##Set System Language 
+## Setting system language
 ```markdown
 ###You can configure the system language by uncommenting the required languages from /etc/locale.gen file
 nano /etc/locale.gen
@@ -115,7 +115,7 @@ locale-gen
 ###Set the LANG variable in /etc/locale.conf file
 echo "LANG=en_US.UTF-8"  > /etc/locale.conf
 ```
-##Setting Timezone
+## Selecting Timezone
 ```markdown
 ###configure the system time zone by creating a symlink of your timezone to the /etc/localtime file
 ln -sf /usr/share/zoneinfo/US/Central /etc/localtime 
@@ -123,16 +123,17 @@ ln -sf /usr/share/zoneinfo/US/Central /etc/localtime
 ###set the hardware clock to UTC.
 hwclock --systohc --utc
 ```
-##Setting Hostname
+## Selecting Hostname 
 ```markdown
 ###Place the system hostname in /etc/hostname file
 echo "archlinux-2021.connor.local" > /etc/hostname
 ```
 ```markdown
-##Set Root Password
+## Setting Root Password
 passwd
 ```
-##Installing Grub Bootloader
+## Installing Grub Bootloader
+
 ```markdown
 ###make sure you are still in arch-chroot
 pacman -S grub efibootmgr
@@ -145,7 +146,7 @@ grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 ###last step below 
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
-##Installing Desktop Enviroment(GNOME in this case)
+## Installing Desktop Enviroment(GNOME in this case)
 ```markdown
 ###here is where you can reboot, I found it easier to install gnome before reboot
 pacman -S xorg
