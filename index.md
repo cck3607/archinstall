@@ -83,7 +83,7 @@ mkdir /mnt/efi
 mount /dev/sda1 /mnt/efi
 swapon /dev/sda2
 ```
-##Selecting Mirrors
+## Selecting Mirroor
 ```markdown
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 ## then update the mirror list file with 10 mirrors by download speed
