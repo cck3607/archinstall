@@ -144,12 +144,58 @@ exit
 ###then shutdowm system and reboot
 shutdown now
 
-[Link](url) and ![Image](src)
+
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+
 
 ### After installing 
 You should now be in the desktop enviroment. Here you must login as root with the password we set earlier.
-
 ## Creating users
+```markdown
+#enter the command below to create user connor 
+sudo useradd connor 
+#you may prompted to enter root password
+#enter the command below to create user sal
+sudo useradd sal
+#enter the command below to create user codi
+sudo useradd codi
+## Setting Password For Users
+#to set password for user connor enter command below
+sudo passwd connor 
+#then enter desired password 
+#to set password for user sal enter command below
+sudo passwd sal
+#then enter desired password 
+#to set password for user codi enter command below
+sudo passwd codi
+## Granting Sudo Permissions For a User
+#enter the command below to grant user connor sudo access
+sudo usermod -a -G wheel connor 
+#enter the command below to grant user sal sudo access
+sudo usermod -a -G wheel sal 
+#enter the command below to grant user codi sudo access
+sudo usermod -a -G wheel codi
+
+##Editing Wheel to allow for sudoers 
+##first we must edit /etc/sudoers 
+nano /etc/sudoers
+#then find the line that begins with #wheel and delete the #
+#control x to save and exit
+## Changing Shell
+##to change the to zsh enter the command below
+chsh -s /bin/zsh
+
+##Adding alias in shell
+#enter command below to add alias to clear
+alias c='clear
+#enter command below to add alias to history 
+alias h='history'
+alias j='jobs -l'
+
+##Adding Color to Shell
+#Enter the command below to change color to red
+PS1="\033[31m[\u@\h \w]\$ \033[0m"
+
+
+```
