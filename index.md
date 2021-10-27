@@ -83,24 +83,30 @@ mkdir /mnt/efi
 mount /dev/sda1 /mnt/efi
 swapon /dev/sda2
 ```
-##Select Mirrors
+##Selecting Mirrors
+```markdown
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 ## then update the mirror list file with 10 mirrors by download speed
 reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
-
-##Install Arch Linux Base System
+```
+##Installing Arch Linux Base System
+```markdown
 pacstrap /mnt/ base linux linux-firmware net-tools networkmanager openssh nano 
 ###you can use nano or vi. Here is where you would install any other tools or packages you want 
-
-##Create fstab
+```
+##Creating fstab
+```markdown
 genfstab -U /mnt >> /mnt/etc/fstab
 ###Verify the fstab entries using the below command.
 cat /mnt/etc/fstab
-
+```
 ##Arch Linux System Configuration 
-arch-chroot /mnt ###chroot to the new system
-
+```markdown
+###chroot to the new system
+arch-chroot /mnt 
+```
 ##Set System Language 
+```markdown
 ###You can configure the system language by uncommenting the required languages from /etc/locale.gen file
 nano /etc/locale.gen
 ###Uncomment en_US.UTF-8 UTF-8 for American-English and then generate locales by running
@@ -108,22 +114,26 @@ nano /etc/locale.gen
 locale-gen
 ###Set the LANG variable in /etc/locale.conf file
 echo "LANG=en_US.UTF-8"  > /etc/locale.conf
-
-##Set Timezone
+```
+##Setting Timezone
+```markdown
 ###configure the system time zone by creating a symlink of your timezone to the /etc/localtime file
 ln -sf /usr/share/zoneinfo/US/Central /etc/localtime 
 ###all the available timezones are found under /usr/share/zoneinfo directory
 ###set the hardware clock to UTC.
 hwclock --systohc --utc
-
-##Set Hostname
+```
+##Setting Hostname
+```markdown
 ###Place the system hostname in /etc/hostname file
 echo "archlinux-2021.connor.local" > /etc/hostname
-
+```
+```markdown
 ##Set Root Password
 passwd
-
-##Install Grub Bootloader
+```
+##Installing Grub Bootloader
+```markdown
 ###make sure you are still in arch-chroot
 pacman -S grub efibootmgr
 ###Create the directory where the EFI partition will be mounted
@@ -134,8 +144,9 @@ mount /dev/sda1 /boot/efi
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 ###last step below 
 grub-mkconfig -o /boot/grub/grub.cfg
-
-##Install Desktop Enviroment(GNOME in this case)
+```
+##Installing Desktop Enviroment(GNOME in this case)
+```markdown
 ###here is where you can reboot, I found it easier to install gnome before reboot
 pacman -S xorg
 ###now install GNOME dektop enviroment on arch linux using
@@ -147,9 +158,7 @@ systemctl enable NetworkManager.service
 ###now exit from chroot with exit command
 exit
 ###then shutdowm system and reboot
-shutdown now
-
-
+shutdwn now
 ```
 
 
@@ -165,7 +174,9 @@ sudo useradd connor
 sudo useradd sal
 #enter the command below to create user codi
 sudo useradd codi
+```
 ## Setting Password For Users
+```markdown
 #to set password for user connor enter command below
 sudo passwd connor 
 #then enter desired password 
@@ -174,7 +185,9 @@ sudo passwd sal
 #then enter desired password 
 #to set password for user codi enter command below
 sudo passwd codi
+```
 ## Granting Sudo Permissions For a User
+```markdown
 #enter the command below to grant user connor sudo access
 sudo usermod -a -G wheel connor 
 #enter the command below to grant user sal sudo access
@@ -187,20 +200,23 @@ sudo usermod -a -G wheel codi
 nano /etc/sudoers
 #then find the line that begins with #wheel and delete the #
 #control x to save and exit
+```
 ## Changing Shell
+```markdown
 ##to change the to zsh enter the command below
 chsh -s /bin/zsh
-
+```
 ##Adding alias in shell
+```markdown
 #enter command below to add alias to clear
 alias c='clear
 #enter command below to add alias to history 
 alias h='history'
 alias j='jobs -l'
-
+```
 ##Adding Color to Shell
+```markdown
 #Enter the command below to change color to red
 PS1="\033[31m[\u@\h \w]\$ \033[0m"
-
 
 ```
